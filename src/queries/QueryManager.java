@@ -7,10 +7,11 @@ import javax.persistence.Tuple;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-//TO DO: Make this one abstract. Instead of immediately querying create extending [type]QueryMakers and send them to
-//the manager
-//Also probably shouldn't be done - wasting time
-
+// This... thing should store stuff and make QueryMakers, not do everything at the same time
+// So when I'm done with it, it will only call MakeQuery.call() with the correct parameters
+// That's probably it.
+// Even getting lists of possible arguments for the user should be done elsewhere
+// And it probably should be done with MakeQuery too, ironically
 public class QueryManager {
     private Session session;
     //Stored info for workerProblemsBydate query
@@ -94,7 +95,7 @@ public class QueryManager {
         if (queryTimePeriod != null && workerId != -1) {
             Date right = new Date(); //today date
             String rightDate = dateFormat.format(right);
-            String leftDate = computeDate(right);
+            String leftDate = calculateDate(right);
             return queryGetTuples(
                     "SELECT car_name, client_name, work_type_name, delivery_date " +
                             "FROM problem " +
@@ -125,7 +126,8 @@ public class QueryManager {
         return totalCost;
     }
 
-    private String computeDate(Date right) {
+//    TODO: You do realize you can calculate dates, right?
+    private String calculateDate(Date right) {
         if (right != null) {
             switch (queryTimePeriod) {
                 case "Past day":

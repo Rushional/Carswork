@@ -25,7 +25,7 @@ public class ResultsDisplayer {
         ControlPanel controlPanel = new ControlPanel(queryManager, this);
         Container pane = frame.getContentPane();
         pane.setLayout(new GridBagLayout());
-        pane.add(controlPanel, controlPanel.getConstraints());
+        pane.add(controlPanel, ControlPanel.getConstraints());
         frame.pack();
     }
 
