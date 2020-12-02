@@ -4,6 +4,8 @@ import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import queries.MakeQuery;
+import queries.QueryStrings;
 
 import javax.persistence.metamodel.EntityType;
 
@@ -30,16 +32,15 @@ public class Main {
     public static void main(final String[] args) throws Exception {
         final Session session = getSession();
         try {
-            System.out.println("querying all the managed entities...");
-            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                final String entityName = entityType.getName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
+            MakeQuery.call(session, QueryStrings.getWorkersQuery());
+            MakeQuery.call(session, QueryStrings.getOrdersQuery());
+            MakeQuery.call(session, QueryStrings.getParametersQuery());
+            MakeQuery.call(session, QueryStrings.getServicesQuery());
+            MakeQuery.call(session, QueryStrings.getOwnedCarsQuery());
+            MakeQuery.call(session, QueryStrings.getPotentialCarsQuery());
+            MakeQuery.call(session, QueryStrings.getRentCostsQuery());
+            MakeQuery.call(session, QueryStrings.getNumericalParametersDataQuery(4));
+            MakeQuery.call(session, QueryStrings.getQualitativeParametersDataQuery(1));
         } finally {
             session.close();
         }

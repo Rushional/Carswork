@@ -12,7 +12,7 @@ public class QueryStrings {
         return (
                 "SELECT name, system_rating, user_feedback\n" +
                 "FROM car\n" +
-                "INNER JOIN owned_car_feedback ON pk_car_id = fk_car_id"
+                "INNER JOIN owned_car_data ON pk_car_id = fk_car_id"
         );
     }
 
@@ -50,8 +50,8 @@ public class QueryStrings {
                 "FROM numerical_car_parameter\n" +
                 "INNER JOIN car\n" +
                         "\tON fk_car_id = pk_car_id\n" +
-                "INNER JOIN owned_car_feedback\n" +
-                        "\tON numerical_car_parameter.fk_car_id = owned_car_feedback.fk_car_id\n" +
+                "INNER JOIN owned_car_data\n" +
+                        "\tON numerical_car_parameter.fk_car_id = owned_car_data.fk_car_id\n" +
                 "WHERE fk_car_parameter_type_id = " + parameterTypeId
         );
     }
@@ -64,8 +64,8 @@ public class QueryStrings {
                         "\tON fk_car_id = pk_car_id\n" +
                 "INNER JOIN qualitative_parameter_variant\n" +
                         "\tON fk_parameter_variant_id = pk_variant_id\n" +
-                "INNER JOIN owned_car_feedback\n" +
-                        "\tON qualitative_car_parameter.fk_car_id = owned_car_feedback.fk_car_id\n" +
+                "INNER JOIN owned_car_data\n" +
+                        "\tON qualitative_car_parameter.fk_car_id = owned_car_data.fk_car_id\n" +
                 "WHERE fk_parameter_type_id = " + parameterTypeId
         );
     }
@@ -81,8 +81,8 @@ public class QueryStrings {
 
     public static String getRentCostsQuery() {
         return (
-                "SELECT name, cost\n" +
-                "FROM rent_car_cost\n" +
+                "SELECT name, rent_cost\n" +
+                "FROM owned_car_data\n" +
                 "INNER JOIN car\n" +
                         "\tON fk_car_id = pk_car_id"
         );
