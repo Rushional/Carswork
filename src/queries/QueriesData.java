@@ -1,0 +1,100 @@
+package queries;
+
+public class QueriesData {
+    public static QueryData workers() {
+        return new QueryData(
+                new String[]{"ФИО", "Отзывы"},
+                "SELECT worker_name, avg_client_feedback\n" +
+                        "FROM worker"
+        );
+    }
+
+    public static QueryData ownedModels() {
+        return new QueryData(
+                new String[]{"Название", "Рейтинг", "Отзывы"},
+                "SELECT model_name, system_rating, user_feedback\n" +
+                        "FROM car_model\n" +
+                        "LEFT JOIN owned_model_data ON model_name = fk_model_name"
+        );
+    }
+
+    public static QueryData potentialModels() {
+        return new QueryData(
+                new String[]{"Название", "Рейтинг"},
+                "SELECT model_name, system_rating\n" +
+                        "FROM car_model\n" +
+                        "WHERE is_owned = false"
+        );
+    }
+
+    public static QueryData orders() {
+        return new QueryData(
+                new String[]{"Клиент", "Телефон", "Сотрудник", "Услуга", "Дата"},
+                "SELECT client_name, phone, worker_name, work_type_name, start_date\n" +
+                        "FROM order_content\n" +
+                        "INNER JOIN client ON client_name = fk_client_name\n" +
+                        "INNER JOIN worker ON worker_name = fk_worker_name\n" +
+                        "INNER JOIN work_type ON work_type_name = fk_work_type_name"
+        );
+    }
+
+    public static QueryData parameters() {
+        return new QueryData(
+                new String[]{"Параметр", "Рейтинг"},
+                "SELECT parameter_name, system_rating\n" +
+                        "FROM car_parameter_type\n" +
+                        "ORDER BY system_rating"
+        );
+    }
+
+//     This query won't be converted into a JTable, so I don't need to have good columnNames for it
+//     And, in my opinion, it's easier to store queries and columnNames together - they are basically inseparable
+//     I mean, this saves me the hassle of juxtaposing queries and column names, if I'd store them separately
+    public static QueryData numerical(String parameter_name) {
+        return new QueryData(
+                null,
+                "SELECT value, user_feedback\n" +
+                        "FROM numerical_model_parameter\n" +
+                        "INNER JOIN car_model\n" +
+                        "\tON model_name = fk_model_name\n" +
+                        "INNER JOIN owned_model_data\n" +
+                        "\tON numerical_model_parameter.fk_model_name = owned_model_data.fk_model_name\n" +
+                        "WHERE fk_parameter_name = '" + parameter_name + "'"
+        );
+    }
+
+    public static QueryData qualitative(String parameter_name) {
+        return new QueryData(
+                null,
+                "SELECT variant_name, user_feedback\n" +
+                        "FROM qualitative_model_parameter\n" +
+                        "INNER JOIN car_model\n" +
+                        "\tON model_name = fk_model_name\n" +
+                        "INNER JOIN qualitative_parameter_variant\n" +
+                        "\tON variant_name = fk_variant\n" +
+                        "INNER JOIN owned_model_data\n" +
+                        "\tON qualitative_model_parameter.fk_model_name = owned_model_data.fk_model_name\n" +
+                        "WHERE fk_parameter_name = '" + parameter_name + "'"
+        );
+    }
+
+    public static QueryData services() {
+        return new QueryData(
+                new String[]{"Услуга", "Цена"},
+                "SELECT work_type_name, service_price\n" +
+                        "FROM work_type\n" +
+                        "INNER JOIN service_type_price\n" +
+                        "\tON work_type_name = fk_work_type_name"
+        );
+    }
+
+    public static QueryData rents() {
+        return new QueryData(
+                new String[]{"Марка", "Стоимость аренды"},
+                "SELECT model_name, rent_cost\n" +
+                        "FROM owned_model_data\n" +
+                        "RIGHT JOIN car_model\n" +
+                        "\tON fk_model_name = model_name"
+        );
+    }
+}
