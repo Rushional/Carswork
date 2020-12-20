@@ -1,6 +1,6 @@
 package graphics;
 
-import queries.QueryManager;
+import queries.LegacyQueryManager;
 
 import javax.persistence.Tuple;
 import javax.swing.*;
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ResultsDisplayer {
     private Frame frame;
-    private QueryManager queryManager;
+    private LegacyQueryManager legacyQueryManager;
 
-    public void setInterface(Frame frame, QueryManager queryManager) {
+    public void setInterface(Frame frame, LegacyQueryManager legacyQueryManager) {
         this.frame = frame;
-        this.queryManager = queryManager;
+        this.legacyQueryManager = legacyQueryManager;
     }
 
     //TO DO I can fix ResultsPanel blinking if I move "removeAll" from
@@ -22,7 +22,7 @@ public class ResultsDisplayer {
     //Buuuut I'm not going to because - again - time is of the essence
     public void recreateFramePane() {
         frame.getContentPane().removeAll();
-        ControlPanel controlPanel = new ControlPanel(queryManager, this);
+        ControlPanel controlPanel = new ControlPanel(legacyQueryManager, this);
         Container pane = frame.getContentPane();
         pane.setLayout(new GridBagLayout());
         pane.add(controlPanel, ControlPanel.getConstraints());
@@ -122,7 +122,7 @@ public class ResultsDisplayer {
         table.toArray(dataForJTable);
         String[] columnNames = {"Car name", "Client name", "Work type", "Delivery date"};
         JTable workerProblemsByDate = new JTable(dataForJTable, columnNames);
-        displayJTable(workerProblemsByDate, queryManager.getQueryTimePeriod() + " services for "+ workerName);
+        displayJTable(workerProblemsByDate, legacyQueryManager.getQueryTimePeriod() + " services for "+ workerName);
     }
 
     public void displayClientCost(double clientCost, String clientName) {

@@ -1,4 +1,4 @@
-package views;
+package views.panels;
 
 import graphics.ListTuplesToTable;
 import org.hibernate.Session;
@@ -9,29 +9,29 @@ import queries.TableData;
 import javax.swing.*;
 import java.awt.*;
 
-public class CarModelsPanel extends JPanel {
-    public CarModelsPanel(Session session) {
+public class OrdersPanel extends JPanel {
+    public OrdersPanel(Session session) {
         setBackground(new Color(235, 240, 255));
         setPreferredSize(new Dimension(700, 300));
         setLayout(new GridBagLayout());
         QueryController queryController = new QueryController(session);
-        TableData carTableData = queryController.getTableData(GetQueryData.selectCars());
-        JTable carTable = ListTuplesToTable.call(carTableData);
+        TableData servicesTableData = queryController.getTableData(GetQueryData.selectOrders());
+        JTable servicesTable = ListTuplesToTable.call(servicesTableData);
 
-        JScrollPane scrollPane = new JScrollPane(carTable);
-        carTable.setFillsViewportHeight(true);
-        scrollPane.setPreferredSize(new Dimension(500, 200));
+        JScrollPane scrollPane = new JScrollPane(servicesTable);
+        servicesTable.setFillsViewportHeight(true);
+        scrollPane.setPreferredSize(new Dimension(650, 200));
         GridBagConstraints scrollPaneConstraints = new GridBagConstraints();
         scrollPaneConstraints.weightx = 1;
         scrollPaneConstraints.weighty = 1;
         scrollPaneConstraints.gridx = 0;
         scrollPaneConstraints.gridy = 0;
         scrollPaneConstraints.anchor = GridBagConstraints.PAGE_START;
-        scrollPaneConstraints.insets = new Insets(10, 0, 0, 0);
+        scrollPaneConstraints.insets = new Insets(10,0,0,0);
         scrollPaneConstraints.gridwidth = 3;
         add(scrollPane, scrollPaneConstraints);
 
-        JButton deleteButton = new JButton("Удалить");
+        JButton deleteButton = new JButton("Принять");
         GridBagConstraints deleteButtonConstraints = new GridBagConstraints();
         deleteButtonConstraints.weightx = 1;
         deleteButtonConstraints.weighty = 1;
@@ -39,20 +39,12 @@ public class CarModelsPanel extends JPanel {
         deleteButtonConstraints.gridy = 1;
         add(deleteButton, deleteButtonConstraints);
 
-        JButton editButton = new JButton("Редактировать");
+        JButton editButton = new JButton("Отклонить");
         GridBagConstraints editButtonConstraints = new GridBagConstraints();
         editButtonConstraints.weightx = 1;
         editButtonConstraints.weighty = 1;
         editButtonConstraints.gridx = 1;
         editButtonConstraints.gridy = 1;
         add(editButton, editButtonConstraints);
-
-        JButton addButton = new JButton("Добавить");
-        GridBagConstraints addButtonConstraints = new GridBagConstraints();
-        addButtonConstraints.weightx = 1;
-        addButtonConstraints.weighty = 1;
-        addButtonConstraints.gridx = 2;
-        addButtonConstraints.gridy = 1;
-        add(addButton, addButtonConstraints);
     }
 }

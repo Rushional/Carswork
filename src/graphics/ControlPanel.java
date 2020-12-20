@@ -1,6 +1,6 @@
 package graphics;
 
-import queries.QueryManager;
+import queries.LegacyQueryManager;
 import interface_interaction.*;
 
 import javax.persistence.Tuple;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ControlPanel extends JPanel {
 
-    public ControlPanel(QueryManager queryManager, ResultsDisplayer resultsDisplayer)
+    public ControlPanel(LegacyQueryManager legacyQueryManager, ResultsDisplayer resultsDisplayer)
     {
         setBackground(new Color(116, 255, 207));
         setPreferredSize(new Dimension(500, 600));
@@ -28,7 +28,7 @@ public class ControlPanel extends JPanel {
         add(workTypesJLabel, workTypesJLabelConstraints);
 
         WorkTypesButton workTypesButton = new WorkTypesButton("Make query");
-        WorkTypesButtonListener workTypesButtonListener = new WorkTypesButtonListener(queryManager, resultsDisplayer);
+        WorkTypesButtonListener workTypesButtonListener = new WorkTypesButtonListener(legacyQueryManager, resultsDisplayer);
         workTypesButton.addActionListener(workTypesButtonListener);
         GridBagConstraints workTypesButtonConstraints = new GridBagConstraints();
         workTypesButtonConstraints.weightx = 1;
@@ -51,7 +51,7 @@ public class ControlPanel extends JPanel {
         add(carsClientsJLabel, carsClientsJLabelConstraints);
 
         CarsClientsButton carsClientsButton = new CarsClientsButton("Make query");
-        CarsClientsButtonListener carsClientsButtonListener = new CarsClientsButtonListener(queryManager, resultsDisplayer);
+        CarsClientsButtonListener carsClientsButtonListener = new CarsClientsButtonListener(legacyQueryManager, resultsDisplayer);
         carsClientsButton.addActionListener(carsClientsButtonListener);
         GridBagConstraints carsClientsButtonConstraints = new GridBagConstraints();
         carsClientsButtonConstraints.weightx = 1;
@@ -74,7 +74,7 @@ public class ControlPanel extends JPanel {
         add(carWorksJLabel, carWorksJLabelConstraints);
 
         ArrayList<String> carNamesList = new ArrayList<String>();
-        List<Tuple> carNamesTuples = queryManager.getCarNames();
+        List<Tuple> carNamesTuples = legacyQueryManager.getCarNames();
         for (Tuple tuple : carNamesTuples) {
             carNamesList.add((String)tuple.get("car_name"));
         }
@@ -82,7 +82,7 @@ public class ControlPanel extends JPanel {
         carNamesList.toArray(carNames);
         CarWorksComboBox carWorksComboBox = new CarWorksComboBox(carNames);
         carWorksComboBox.setSelectedIndex(0);
-        CarWorksComboListener carWorksComboListener = new CarWorksComboListener(queryManager, resultsDisplayer);
+        CarWorksComboListener carWorksComboListener = new CarWorksComboListener(legacyQueryManager, resultsDisplayer);
         carWorksComboBox.addActionListener(carWorksComboListener);
         GridBagConstraints carWorksComboBoxConstraints = new GridBagConstraints();
         carWorksComboBoxConstraints.weightx = 1;
@@ -107,7 +107,7 @@ public class ControlPanel extends JPanel {
         String[] timePeriods = { "Past day", "Past week", "Past month", "Past quarter of a year", "Past year" };
         WorkerProblemsByDateComboBoxDate workerProblemsByDateComboBoxDate = new WorkerProblemsByDateComboBoxDate(timePeriods);
         workerProblemsByDateComboBoxDate.setSelectedIndex(0);
-        WorkerProblemsByDateComboListenerDate workerProblemsByDateComboListenerDate = new WorkerProblemsByDateComboListenerDate(queryManager);
+        WorkerProblemsByDateComboListenerDate workerProblemsByDateComboListenerDate = new WorkerProblemsByDateComboListenerDate(legacyQueryManager);
         workerProblemsByDateComboBoxDate.addActionListener(workerProblemsByDateComboListenerDate);
         GridBagConstraints workerProblemsByDateComboBoxConstraintsDate = new GridBagConstraints();
         workerProblemsByDateComboBoxConstraintsDate.weightx = 1;
@@ -117,7 +117,7 @@ public class ControlPanel extends JPanel {
         add(workerProblemsByDateComboBoxDate, workerProblemsByDateComboBoxConstraintsDate);
 
         ArrayList<String> workerNamesList = new ArrayList<String>();
-        List<Tuple> workerNamesTuples = queryManager.getWorkerNames();
+        List<Tuple> workerNamesTuples = legacyQueryManager.getWorkerNames();
         for (Tuple tuple : workerNamesTuples) {
             workerNamesList.add((String)tuple.get("worker_name"));
         }
@@ -125,7 +125,7 @@ public class ControlPanel extends JPanel {
         workerNamesList.toArray(workerNames);
         WorkerProblemsByDateComboBoxWorker workerProblemsByDateComboBoxWorker = new WorkerProblemsByDateComboBoxWorker(workerNames);
         workerProblemsByDateComboBoxWorker.setSelectedIndex(0);
-        WorkerProblemsByDateComboListenerWorker workerProblemsByDateComboListenerWorker = new WorkerProblemsByDateComboListenerWorker(queryManager);
+        WorkerProblemsByDateComboListenerWorker workerProblemsByDateComboListenerWorker = new WorkerProblemsByDateComboListenerWorker(legacyQueryManager);
         workerProblemsByDateComboBoxWorker.addActionListener(workerProblemsByDateComboListenerWorker);
         GridBagConstraints workerProblemsByDateComboBoxConstraintsWorker = new GridBagConstraints();
         workerProblemsByDateComboBoxConstraintsWorker.weightx = 1;
@@ -135,7 +135,7 @@ public class ControlPanel extends JPanel {
         add(workerProblemsByDateComboBoxWorker, workerProblemsByDateComboBoxConstraintsWorker);
 
         WorkerProblemsByDateButton workerProblemsByDateButton = new WorkerProblemsByDateButton("Make query");
-        WorkerProblemsByDateButtonListener workerProblemsByDateButtonListener = new WorkerProblemsByDateButtonListener(queryManager, resultsDisplayer);
+        WorkerProblemsByDateButtonListener workerProblemsByDateButtonListener = new WorkerProblemsByDateButtonListener(legacyQueryManager, resultsDisplayer);
         workerProblemsByDateButton.addActionListener(workerProblemsByDateButtonListener);
         GridBagConstraints workerProblemsByDateButtonConstraints = new GridBagConstraints();
         workerProblemsByDateButtonConstraints.weightx = 1;
@@ -156,7 +156,7 @@ public class ControlPanel extends JPanel {
         add(clientCostJLabel, clientCostJLabelConstraints);
 
         ArrayList<String> clientNamesList = new ArrayList<String>();
-        List<Tuple> clientNamesTuples = queryManager.getClientNames();
+        List<Tuple> clientNamesTuples = legacyQueryManager.getClientNames();
         for (Tuple tuple : clientNamesTuples) {
             clientNamesList.add((String)tuple.get("client_name"));
         }
@@ -164,7 +164,7 @@ public class ControlPanel extends JPanel {
         clientNamesList.toArray(clientNames);
         ClientCostComboBox clientCostComboBox = new ClientCostComboBox(clientNames);
         clientCostComboBox.setSelectedIndex(0);
-        ClientCostComboListener clientCostComboListener = new ClientCostComboListener(queryManager, resultsDisplayer);
+        ClientCostComboListener clientCostComboListener = new ClientCostComboListener(legacyQueryManager, resultsDisplayer);
         clientCostComboBox.addActionListener(clientCostComboListener);
         GridBagConstraints clientCostComboBoxConstraints = new GridBagConstraints();
         clientCostComboBoxConstraints.weightx = 1;

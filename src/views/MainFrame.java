@@ -1,23 +1,24 @@
 package views;
 
-import graphics.ResultsPanel;
 import org.hibernate.Session;
+import views.panels.CarModelsPanel;
+import views.panels.OutputPanel;
+import views.panels.ServicesPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
     public MainFrame(Session session) {
-        super("Администратор");
+        super("Управление автосервисом");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Услуги", new ServicesPanel(session));
         tabbedPane.addTab("Марки машин", new OutputPanel());
         tabbedPane.addTab("Машины", new CarModelsPanel(session));
-        tabbedPane.addTab("Статистика", new OutputPanel());
+        tabbedPane.addTab("Заказы", new OutputPanel());
         tabbedPane.addTab("Рекомендации", new OutputPanel());
-        tabbedPane.addTab("Договоры", new OutputPanel());
+        tabbedPane.addTab("Услуги", new ServicesPanel(session));
         add(tabbedPane, BorderLayout.WEST);
         setResizable(false);
     }

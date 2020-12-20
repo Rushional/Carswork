@@ -1,19 +1,19 @@
 package graphics;
 
 import org.hibernate.Session;
-import queries.QueryManager;
+import queries.LegacyQueryManager;
 
 import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class InterfaceInitiator {
-    private QueryManager queryManager;
+    private LegacyQueryManager legacyQueryManager;
     private ResultsDisplayer resultsDisplayer;
     private Frame frame;
 
 
     public InterfaceInitiator(Session session) {
-        queryManager = new QueryManager(session);
+        legacyQueryManager = new LegacyQueryManager(session);
         resultsDisplayer = new ResultsDisplayer();
     }
 
@@ -21,7 +21,7 @@ public class InterfaceInitiator {
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
                 public void run() {
-                    frame = new Frame(queryManager, resultsDisplayer);
+                    frame = new Frame(legacyQueryManager, resultsDisplayer);
                     frame.pack();
                     frame.setVisible(true);
                 }
@@ -29,14 +29,14 @@ public class InterfaceInitiator {
         } catch (InterruptedException | InvocationTargetException e) {
             e.printStackTrace(System.out);
         }
-        resultsDisplayer.setInterface(frame, queryManager);
+        resultsDisplayer.setInterface(frame, legacyQueryManager);
     }
 
     public Frame getFrame() {
         return frame;
     }
 
-    public QueryManager getQueryManager() {
-        return queryManager;
+    public LegacyQueryManager getLegacyQueryManager() {
+        return legacyQueryManager;
     }
 }

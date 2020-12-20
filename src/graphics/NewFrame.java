@@ -1,6 +1,6 @@
 package graphics;
 
-import queries.QueryManager;
+import queries.LegacyQueryManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,9 +20,9 @@ public class NewFrame extends JFrame {
     private ResultsPanel resultsPanel;
     private Container pane;
 
-    public NewFrame(QueryManager queryManager, ResultsDisplayer resultsDisplayer) {
+    public NewFrame(LegacyQueryManager legacyQueryManager, ResultsDisplayer resultsDisplayer) {
         super("Работа с базой данных");
-        controlPanel = new ControlPanel(queryManager, resultsDisplayer);
+        controlPanel = new ControlPanel(legacyQueryManager, resultsDisplayer);
         resultsPanel = new ResultsPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);

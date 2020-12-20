@@ -1,20 +1,20 @@
 package interface_interaction;
 
-import queries.QueryManager;
+import queries.LegacyQueryManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WorkerProblemsByDateComboListenerDate implements ActionListener {
-    private QueryManager queryManager;
+    private LegacyQueryManager legacyQueryManager;
 
-    public WorkerProblemsByDateComboListenerDate(QueryManager queryManager) {
-        this.queryManager = queryManager;
+    public WorkerProblemsByDateComboListenerDate(LegacyQueryManager legacyQueryManager) {
+        this.legacyQueryManager = legacyQueryManager;
     }
 
     public void actionPerformed(ActionEvent e) {
         WorkerProblemsByDateComboBoxDate workerProblemsByDateComboBoxDate = (WorkerProblemsByDateComboBoxDate)e.getSource();
         String timePeriod = (String)workerProblemsByDateComboBoxDate.getSelectedItem();
-        queryManager.setQueryTimePeriod(timePeriod);
+        legacyQueryManager.setQueryTimePeriod(timePeriod);
     }
 }

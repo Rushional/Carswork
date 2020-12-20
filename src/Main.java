@@ -1,18 +1,8 @@
-import graphics.InterfaceInitiator;
-import graphics.ListTuplesToTable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import queries.*;
 import views.Initiator;
-import views.MainFrame;
-import views.ManagerInitiator;
-import views.WorkerFrameInitiator;
-
-import javax.persistence.Tuple;
-import javax.swing.*;
-import java.util.List;
 
 public class Main {
     private static final SessionFactory ourSessionFactory;
@@ -33,11 +23,13 @@ public class Main {
     }
 
     public static void main(final String[] args) throws Exception {
+//        double[] horsepower = new double[] {400, 282, 234, 166, 201, 240, 96, 70, 116, 197, 346};
+//        double[] feedback = new double[] {4.98, 3.57, 2.93, 2.12, 2.46, 3.09, 1.23, 0.88, 1.45, 2.39, 4.47};
+//        System.out.println(CalculateNumCorrelation.call(horsepower, feedback));
         final Session session = getSession();
         try {
-//            Initiator interfaceInitiator = new Initiator();
-            ManagerInitiator interfaceInitiator = new ManagerInitiator();
-            interfaceInitiator.initiateInterface(session);
+            Initiator initiator = new Initiator();
+            initiator.initiateInterface(session);
 //            QueryController queryController = new QueryController(session);
 //            TableData servicesTableData = queryController.getTableData(GetQueryData.selectServices());
 //            JTable servicesTable = ListTuplesToTable.call(servicesTableData);

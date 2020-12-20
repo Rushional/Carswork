@@ -1,6 +1,7 @@
-package views;
+package views.panels;
 
 import graphics.ListTuplesToTable;
+import graphics.ResultsPanel;
 import org.hibernate.Session;
 import queries.GetQueryData;
 import queries.QueryController;
@@ -9,13 +10,13 @@ import queries.TableData;
 import javax.swing.*;
 import java.awt.*;
 
-public class WorkersPanel extends JPanel {
-    public WorkersPanel(Session session) {
+public class ServicesPanel extends JPanel {
+    public ServicesPanel(Session session) {
         setBackground(new Color(235, 240, 255));
         setPreferredSize(new Dimension(700, 300));
         setLayout(new GridBagLayout());
         QueryController queryController = new QueryController(session);
-        TableData servicesTableData = queryController.getTableData(GetQueryData.selectWorkers());
+        TableData servicesTableData = queryController.getTableData(GetQueryData.selectServices());
         JTable servicesTable = ListTuplesToTable.call(servicesTableData);
 
         JScrollPane scrollPane = new JScrollPane(servicesTable);

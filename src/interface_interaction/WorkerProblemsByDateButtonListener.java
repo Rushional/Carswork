@@ -1,23 +1,23 @@
 package interface_interaction;
 
 import graphics.ResultsDisplayer;
-import queries.QueryManager;
+import queries.LegacyQueryManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WorkerProblemsByDateButtonListener implements ActionListener {
-    private QueryManager queryManager;
+    private LegacyQueryManager legacyQueryManager;
     private ResultsDisplayer resultsDisplayer;
 
-    public WorkerProblemsByDateButtonListener(QueryManager queryManager, ResultsDisplayer resultsDisplayer) {
-        this.queryManager = queryManager;
+    public WorkerProblemsByDateButtonListener(LegacyQueryManager legacyQueryManager, ResultsDisplayer resultsDisplayer) {
+        this.legacyQueryManager = legacyQueryManager;
         this.resultsDisplayer = resultsDisplayer;
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (queryManager.getQueryTimePeriod() != null && queryManager.getWorkerId() != -1) {
-            resultsDisplayer.displayWorkerProblemsByDate(queryManager.workerProblemsByDate(), queryManager.getWorkerName());
+        if (legacyQueryManager.getQueryTimePeriod() != null && legacyQueryManager.getWorkerId() != -1) {
+            resultsDisplayer.displayWorkerProblemsByDate(legacyQueryManager.workerProblemsByDate(), legacyQueryManager.getWorkerName());
         }
     }
 }

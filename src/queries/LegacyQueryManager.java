@@ -12,7 +12,7 @@ import java.util.List;
 // That's probably it.
 // Even getting lists of possible arguments for the user should be done elsewhere
 // And it probably should be done with MakeQuery too, ironically
-public class QueryManager {
+public class LegacyQueryManager {
     private Session session;
     //Stored info for workerProblemsBydate query
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -45,7 +45,7 @@ public class QueryManager {
     private List<Tuple> workerNames;
     private List<Tuple> clientNames;
 
-    public QueryManager(Session session) {
+    public LegacyQueryManager(Session session) {
         this.session = session;
 //        this.dateFormat = new SimpleDateFormat(pattern);
     }
