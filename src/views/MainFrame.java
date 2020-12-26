@@ -1,9 +1,8 @@
 package views;
 
 import org.hibernate.Session;
-import views.panels.CarModelsPanel;
-import views.panels.OutputPanel;
-import views.panels.ServicesPanel;
+import queries.QueryController;
+import views.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +12,14 @@ public class MainFrame extends JFrame {
         super("Управление автосервисом");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        QueryController queryController = new QueryController(session);
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Марки машин", new OutputPanel());
-        tabbedPane.addTab("Машины", new CarModelsPanel(session));
-        tabbedPane.addTab("Заказы", new OutputPanel());
-        tabbedPane.addTab("Рекомендации", new OutputPanel());
-        tabbedPane.addTab("Услуги", new ServicesPanel(session));
+        tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController));
+        tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController));
+        tabbedPane.addTab("Машины", new CarsPanel(queryController));
+        tabbedPane.addTab("Заказы", new OrdersPanel(queryController));
+        tabbedPane.addTab("Рекомендации", new RecommendationsPanel(queryController));
+        tabbedPane.addTab("Услуги", new ServicesPanel(queryController));
         add(tabbedPane, BorderLayout.WEST);
         setResizable(false);
     }

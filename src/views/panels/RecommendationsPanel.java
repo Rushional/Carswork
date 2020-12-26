@@ -4,13 +4,13 @@ import queries.QueriesData;
 import queries.QueryController;
 import queries.QueryData;
 
-public class OrdersPanel extends TablePanel {
-    public OrdersPanel(QueryController queryController) {
+public class RecommendationsPanel extends TablePanel {
+    public RecommendationsPanel(QueryController queryController) {
         super(queryController, true);
     }
 
     @Override
     QueryData getQueryData() {
-        return QueriesData.orders();
+        return QueriesData.parameters();
     }
 }

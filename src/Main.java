@@ -5,21 +5,21 @@ import org.hibernate.cfg.Configuration;
 import views.Initiator;
 
 public class Main {
-    private static final SessionFactory ourSessionFactory;
+    private static final SessionFactory sessionFactory;
 
     static {
         try {
             Configuration configuration = new Configuration();
             configuration.configure();
 
-            ourSessionFactory = configuration.buildSessionFactory();
+            sessionFactory = configuration.buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }
     }
 
     public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
+        return sessionFactory.openSession();
     }
 
     public static void main(final String[] args) throws Exception {

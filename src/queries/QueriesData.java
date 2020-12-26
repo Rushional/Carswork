@@ -11,12 +11,23 @@ public class QueriesData {
 
     public static QueryData ownedModels() {
         return new QueryData(
-                new String[]{"Название", "Рейтинг", "Отзывы"},
-                "SELECT model_name, system_rating, user_feedback\n" +
+                new String[]{"Название", "Рейтинг", "Отзывы", "Стоимость аренды"},
+                "SELECT model_name, system_rating, user_feedback, rent_cost\n" +
                         "FROM car_model\n" +
-                        "LEFT JOIN owned_model_data ON model_name = fk_model_name"
+                        "LEFT JOIN owned_model_data ON model_name = fk_model_name\n" +
+                        "WHERE is_owned = true"
         );
     }
+
+    public static QueryData cars() {
+        return new QueryData(
+                new String[]{"Марка", "Цвет", "Номер"},
+                "SELECT model_name, fk_color_name, license_plate\n" +
+                        "FROM car\n" +
+                        "INNER JOIN car_model ON fk_model_name = model_name"
+        );
+    }
+
 
     public static QueryData potentialModels() {
         return new QueryData(
@@ -49,7 +60,7 @@ public class QueriesData {
 
 //     This query won't be converted into a JTable, so I don't need to have good columnNames for it
 //     And, in my opinion, it's easier to store queries and columnNames together - they are basically inseparable
-//     I mean, this saves me the hassle of juxtaposing queries and column names, if I'd store them separately
+//     I mean, this class saves me the hassle of matching queries and column names, if I'd store them separately
     public static QueryData numerical(String parameter_name) {
         return new QueryData(
                 null,
