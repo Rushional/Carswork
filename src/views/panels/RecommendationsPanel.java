@@ -1,8 +1,7 @@
 package views.panels;
 
-import queries.QueriesData;
-import queries.QueryController;
-import queries.QueryData;
+import controllers.QueryController;
+import queries.SelectQueries;
 
 public class RecommendationsPanel extends TablePanel {
     public RecommendationsPanel(QueryController queryController) {
@@ -10,7 +9,7 @@ public class RecommendationsPanel extends TablePanel {
     }
 
     @Override
-    QueryData getQueryData() {
-        return QueriesData.parameters();
+    SelectQueries getQueryEnum() {
+        return SelectQueries.PARAMETERS_OUTPUT;
     }
 }

@@ -1,8 +1,9 @@
 package views.panels;
 
 import queries.QueriesData;
-import queries.QueryController;
+import controllers.QueryController;
 import queries.QueryData;
+import queries.SelectQueries;
 
 public class CarModelsPanel extends TablePanel {
     public CarModelsPanel(QueryController queryController) {
@@ -10,7 +11,7 @@ public class CarModelsPanel extends TablePanel {
     }
 
     @Override
-    QueryData getQueryData() {
-        return QueriesData.ownedModels();
+    SelectQueries getQueryEnum() {
+        return SelectQueries.OWNED_MODELS;
     }
 }

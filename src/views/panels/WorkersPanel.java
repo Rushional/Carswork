@@ -1,8 +1,9 @@
 package views.panels;
 
 import queries.QueriesData;
-import queries.QueryController;
+import controllers.QueryController;
 import queries.QueryData;
+import queries.SelectQueries;
 
 public class WorkersPanel extends TablePanel {
     public WorkersPanel(QueryController queryController) {
@@ -10,7 +11,7 @@ public class WorkersPanel extends TablePanel {
     }
 
     @Override
-    QueryData getQueryData() {
-        return QueriesData.workers();
+    SelectQueries getQueryEnum() {
+        return SelectQueries.WORKERS;
     }
 }

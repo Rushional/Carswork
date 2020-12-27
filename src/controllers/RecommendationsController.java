@@ -1,8 +1,10 @@
-package models;
+package controllers;
 
-import queries.QueriesData;
-import queries.QueryController;
-import queries.QueryData;
+import controllers.QueryController;
+import models.NumericalCorrelationData;
+import models.ParameterInfo;
+import models.QualCorrelationData;
+import queries.SelectQueries;
 import services.*;
 
 import javax.persistence.Tuple;
@@ -12,10 +14,12 @@ import java.util.List;
 // Man, my comments are ON POINT!
 // tbh I felt that I needed to explain what this... THING does,
 // but I realized I don't fully understand yet how exactly I'm going to implement it
-public class Recommender {
+// Alright, now that I've written some code and better see what's up, I can explain it
+// This THING gets a list of parameters from the db, calculates
+public class RecommendationsController {
     private QueryController queryController;
 
-    public Recommender(QueryController queryController) {
+    public RecommendationsController(QueryController queryController) {
         this.queryController = queryController;
     }
 
@@ -45,12 +49,10 @@ public class Recommender {
     }
 
     private List<Tuple> getNumericalTuples(String parameterName) {
-        QueryData queryData = QueriesData.numerical(parameterName);
-        return queryController.getTableData(queryData).getTuplesList();
+        return queryController.getParameterTable(SelectQueries.NUMERICAL, parameterName);
     }
 
     private List<Tuple> getQualTuples(String parameterName) {
-        QueryData queryData = QueriesData.qualitative(parameterName);
-        return queryController.getTableData(queryData).getTuplesList();
+        return queryController.getParameterTable(SelectQueries.QUALITATIVE, parameterName);
     }
 }

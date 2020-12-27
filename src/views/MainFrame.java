@@ -1,7 +1,7 @@
 package views;
 
 import org.hibernate.Session;
-import queries.QueryController;
+import controllers.QueryController;
 import views.panels.*;
 
 import javax.swing.*;

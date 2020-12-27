@@ -1,8 +1,9 @@
 package views.panels;
 
 import queries.QueriesData;
-import queries.QueryController;
+import controllers.QueryController;
 import queries.QueryData;
+import queries.SelectQueries;
 
 public class ServicesPanel extends TablePanel {
     public ServicesPanel(QueryController queryController) {
@@ -10,7 +11,7 @@ public class ServicesPanel extends TablePanel {
     }
 
     @Override
-    QueryData getQueryData() {
-        return QueriesData.services();
+    SelectQueries getQueryEnum() {
+        return SelectQueries.SERVICES;
     }
 }

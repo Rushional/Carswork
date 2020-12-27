@@ -1,8 +1,9 @@
 package views.panels;
 
 import queries.QueriesData;
-import queries.QueryController;
+import controllers.QueryController;
 import queries.QueryData;
+import queries.SelectQueries;
 
 public class OrdersPanel extends TablePanel {
     public OrdersPanel(QueryController queryController) {
@@ -10,7 +11,7 @@ public class OrdersPanel extends TablePanel {
     }
 
     @Override
-    QueryData getQueryData() {
-        return QueriesData.orders();
+    SelectQueries getQueryEnum() {
+        return SelectQueries.ORDERS;
     }
 }

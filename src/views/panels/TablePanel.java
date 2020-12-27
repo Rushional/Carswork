@@ -1,7 +1,7 @@
 package views.panels;
 
-import queries.QueryController;
-import queries.QueryData;
+import controllers.QueryController;
+import queries.SelectQueries;
 import queries.TableData;
 import services.TableDataToJTable;
 
@@ -71,13 +71,13 @@ public abstract class TablePanel extends JPanel {
 //    calls MakeQuery with the right parameters (taken from QueriesData) and so gets the needed table
 //    that will be used in replaceTable
     private JTable getJTable() {
-        TableData tableData = queryController.getTableData(getQueryData());
+        TableData tableData = queryController.getTableData(getQueryEnum());
         return TableDataToJTable.call(tableData);
     }
 
     /**
-     * Gets a correct QueryData object from QueriesData
+     * Gets a correct SelectQueries enum that will be used to make a correct fetch query5
      * @return the data needed to make a JTable to output on the panel
      */
-    abstract QueryData getQueryData();
+    abstract SelectQueries getQueryEnum();
 }

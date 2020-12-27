@@ -49,7 +49,7 @@ public class QueriesData {
         );
     }
 
-    public static QueryData parameters() {
+    public static QueryData parametersOutput() {
         return new QueryData(
                 new String[]{"Параметр", "Рейтинг"},
                 "SELECT parameter_name, system_rating\n" +
@@ -58,10 +58,30 @@ public class QueriesData {
         );
     }
 
+    public static QueryData services() {
+        return new QueryData(
+                new String[]{"Услуга", "Цена"},
+                "SELECT work_type_name, service_price\n" +
+                        "FROM work_type\n" +
+                        "INNER JOIN service_type_price\n" +
+                        "\tON work_type_name = fk_work_type_name"
+        );
+    }
+
+    public static QueryData rents() {
+        return new QueryData(
+                new String[]{"Марка", "Стоимость аренды"},
+                "SELECT model_name, rent_cost\n" +
+                        "FROM owned_model_data\n" +
+                        "RIGHT JOIN car_model\n" +
+                        "\tON fk_model_name = model_name"
+        );
+    }
+
 //     This query won't be converted into a JTable, so I don't need to have good columnNames for it
-//     And, in my opinion, it's easier to store queries and columnNames together - they are basically inseparable
+//     And it's easier to store queries and columnNames together - they are basically inseparable
 //     I mean, this class saves me the hassle of matching queries and column names, if I'd store them separately
-    public static QueryData parametersForCalculation() {
+    public static QueryData parametersList() {
         return new QueryData(
                 null,
                 "SELECT parameter_name, is_numerical\n" +
@@ -94,26 +114,6 @@ public class QueriesData {
                         "INNER JOIN owned_model_data\n" +
                         "\tON qualitative_model_parameter.fk_model_name = owned_model_data.fk_model_name\n" +
                         "WHERE fk_parameter_name = '" + parameter_name + "'"
-        );
-    }
-
-    public static QueryData services() {
-        return new QueryData(
-                new String[]{"Услуга", "Цена"},
-                "SELECT work_type_name, service_price\n" +
-                        "FROM work_type\n" +
-                        "INNER JOIN service_type_price\n" +
-                        "\tON work_type_name = fk_work_type_name"
-        );
-    }
-
-    public static QueryData rents() {
-        return new QueryData(
-                new String[]{"Марка", "Стоимость аренды"},
-                "SELECT model_name, rent_cost\n" +
-                        "FROM owned_model_data\n" +
-                        "RIGHT JOIN car_model\n" +
-                        "\tON fk_model_name = model_name"
         );
     }
 }
