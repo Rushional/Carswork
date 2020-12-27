@@ -3,9 +3,7 @@ package models;
 import queries.QueriesData;
 import queries.QueryController;
 import queries.QueryData;
-import services.CalculateNumRating;
-import services.ConvertTuplesToNumCorrelationData;
-import services.FetchParameterInfos;
+import services.*;
 
 import javax.persistence.Tuple;
 import java.util.List;
@@ -27,15 +25,20 @@ public class Recommender {
 //        for each one calculate the appropriate correlation and make an update query!
         for (ParameterInfo parameterInfo : parameterInfoList) {
             double systemRating;
+            String parameterName = parameterInfo.getParameterTypeName();
             if (parameterInfo.isNumerical()) {
 //                Make a numerical parameter query
-                List<Tuple> tuplesList = getNumericalTuples(parameterInfo.getParameterTypeName());
-                NumericalCorrelationData correlationData = ConvertTuplesToNumCorrelationData.call(tuplesList);
+                List<Tuple> tuplesList = getNumericalTuples(parameterName);
+                NumericalCorrelationData correlationData =
+                        ConvertTuplesToNumCorrelationData.call(tuplesList);
                 systemRating = CalculateNumRating.call(correlationData);
 //                Give that thing to the CalculateNumCorrelationService and initiate systemRating
             }
             else {
-
+                List<Tuple> tuplesList = getQualTuples(parameterName);
+                QualCorrelationData correlationData =
+                        ConvertTuplesToQualCorrelationData.call(tuplesList);
+                systemRating = CalculateQualRating.call(correlationData);
             }
 //            send an update query with parameterInfo.getParameterTypeName() and systemRating
         }
@@ -46,5 +49,8 @@ public class Recommender {
         return queryController.getTableData(queryData).getTuplesList();
     }
 
-
+    private List<Tuple> getQualTuples(String parameterName) {
+        QueryData queryData = QueriesData.qualitative(parameterName);
+        return queryController.getTableData(queryData).getTuplesList();
+    }
 }
