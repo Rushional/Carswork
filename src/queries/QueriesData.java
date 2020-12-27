@@ -61,6 +61,14 @@ public class QueriesData {
 //     This query won't be converted into a JTable, so I don't need to have good columnNames for it
 //     And, in my opinion, it's easier to store queries and columnNames together - they are basically inseparable
 //     I mean, this class saves me the hassle of matching queries and column names, if I'd store them separately
+    public static QueryData parametersForCalculation() {
+        return new QueryData(
+                null,
+                "SELECT parameter_name, is_numerical\n" +
+                        "FROM car_parameter_type"
+        );
+    }
+
     public static QueryData numerical(String parameter_name) {
         return new QueryData(
                 null,

@@ -1,11 +1,15 @@
-package models;
+package services;
 
-public class CalculateNumCorrelation {
-    public static double call(double[] values, double[] feedback) {
+import models.NumericalCorrelationData;
+
+public class CalculateNumRating {
+    public static double call(NumericalCorrelationData correlationData) {
 //        I don't want to bother making some kind of ValuesFeedback class
 //        or - worse yet - link models and views via the Tuple class.
 //        So I decided to use simple arrays, yeah -  forcing the programmer remember to use this correctly
 //        It's kinda bad, but it's simple so that's what I'm going with
+        double[] values = correlationData.getValues();
+        double[] feedback = correlationData.getUserFeedback();
         int amount = values.length;
         if (amount != feedback.length) throw new RuntimeException();
         double valuesSum = 0;
@@ -24,6 +28,8 @@ public class CalculateNumCorrelation {
             dividerValueSum += Math.pow(values[i] - averageValue , 2);
             dividerFeedbackSum += Math.pow(feedback[i] - averageFeedback , 2);
         }
-        return numeratorSum/Math.sqrt(dividerValueSum*dividerFeedbackSum);
+        double correlation = numeratorSum/Math.sqrt(dividerValueSum*dividerFeedbackSum);
+        return correlation * 5; //I wanted to separate correlation and rating here.
+//       Correlation ranges from 0 to 1, but rating - to 5. It's just more flashy!
     }
 }
