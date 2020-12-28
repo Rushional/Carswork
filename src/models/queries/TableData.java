@@ -1,4 +1,4 @@
-package queries;
+package models.queries;
 
 import javax.persistence.Tuple;
 import java.util.List;

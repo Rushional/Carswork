@@ -3,8 +3,8 @@ package graphics;
 import javax.swing.*;
 import java.awt.*;
 
-public class ResultsPanel extends JPanel {
-    public ResultsPanel()
+public class LegacyResultsPanel extends JPanel {
+    public LegacyResultsPanel()
     {
         setBackground(new Color(235, 240, 255));
         setPreferredSize(new Dimension(700, 600));

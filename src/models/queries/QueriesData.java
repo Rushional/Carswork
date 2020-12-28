@@ -1,10 +1,10 @@
-package queries;
+package models.queries;
 
 public class QueriesData {
     public static QueryData workers() {
         return new QueryData(
-                new String[]{"ФИО", "Отзывы"},
-                "SELECT worker_name, avg_client_feedback\n" +
+                new String[]{"ФИО", "Отзывы", "Номер телефона"},
+                "SELECT worker_name, avg_client_feedback, phone_number\n" +
                         "FROM worker"
         );
     }
@@ -68,19 +68,9 @@ public class QueriesData {
         );
     }
 
-    public static QueryData rents() {
-        return new QueryData(
-                new String[]{"Марка", "Стоимость аренды"},
-                "SELECT model_name, rent_cost\n" +
-                        "FROM owned_model_data\n" +
-                        "RIGHT JOIN car_model\n" +
-                        "\tON fk_model_name = model_name"
-        );
-    }
-
 //     This query won't be converted into a JTable, so I don't need to have good columnNames for it
-//     And it's easier to store queries and columnNames together - they are basically inseparable
-//     I mean, this class saves me the hassle of matching queries and column names, if I'd store them separately
+//     And it's easier to store models.queries and columnNames together - they are basically inseparable
+//     I mean, this class saves me the hassle of matching models.queries and column names, if I'd store them separately
     public static QueryData parametersList() {
         return new QueryData(
                 null,

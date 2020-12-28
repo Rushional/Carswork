@@ -1,13 +1,11 @@
 package views.panels;
 
-import queries.QueriesData;
 import controllers.QueryController;
-import queries.QueryData;
-import queries.SelectQueries;
+import models.queries.SelectQueries;
 
 public class OrdersPanel extends TablePanel {
     public OrdersPanel(QueryController queryController) {
-        super(queryController, true);
+        super(queryController);
     }
 
     @Override

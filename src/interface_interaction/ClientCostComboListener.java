@@ -1,24 +1,24 @@
 package interface_interaction;
 
-import graphics.ResultsDisplayer;
-import queries.LegacyQueryManager;
+import graphics.LegacyResultsDisplayer;
+import models.database_interaction.LegacyQueryManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ClientCostComboListener implements ActionListener {
     private LegacyQueryManager legacyQueryManager;
-    private ResultsDisplayer resultsDisplayer;
+    private LegacyResultsDisplayer legacyResultsDisplayer;
 
-    public ClientCostComboListener(LegacyQueryManager legacyQueryManager, ResultsDisplayer resultsDisplayer) {
+    public ClientCostComboListener(LegacyQueryManager legacyQueryManager, LegacyResultsDisplayer legacyResultsDisplayer) {
         this.legacyQueryManager = legacyQueryManager;
-        this.resultsDisplayer = resultsDisplayer;
+        this.legacyResultsDisplayer = legacyResultsDisplayer;
     }
 
     public void actionPerformed(ActionEvent e) {
         ClientCostComboBox clientCostComboBox = (ClientCostComboBox)e.getSource();
         int index = clientCostComboBox.getSelectedIndex();
         int clientId = (int) legacyQueryManager.getClientNames().get(index).get("id");
-        resultsDisplayer.displayClientCost(legacyQueryManager.clientCost(clientId), (String)clientCostComboBox.getSelectedItem());
+        legacyResultsDisplayer.displayClientCost(legacyQueryManager.clientCost(clientId), (String)clientCostComboBox.getSelectedItem());
     }
 }

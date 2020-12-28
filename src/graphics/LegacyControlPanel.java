@@ -1,6 +1,6 @@
 package graphics;
 
-import queries.LegacyQueryManager;
+import models.database_interaction.LegacyQueryManager;
 import interface_interaction.*;
 
 import javax.persistence.Tuple;
@@ -9,9 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControlPanel extends JPanel {
+public class LegacyControlPanel extends JPanel {
 
-    public ControlPanel(LegacyQueryManager legacyQueryManager, ResultsDisplayer resultsDisplayer)
+    public LegacyControlPanel(LegacyQueryManager legacyQueryManager, LegacyResultsDisplayer legacyResultsDisplayer)
     {
         setBackground(new Color(116, 255, 207));
         setPreferredSize(new Dimension(500, 600));
@@ -28,7 +28,7 @@ public class ControlPanel extends JPanel {
         add(workTypesJLabel, workTypesJLabelConstraints);
 
         WorkTypesButton workTypesButton = new WorkTypesButton("Make query");
-        WorkTypesButtonListener workTypesButtonListener = new WorkTypesButtonListener(legacyQueryManager, resultsDisplayer);
+        WorkTypesButtonListener workTypesButtonListener = new WorkTypesButtonListener(legacyQueryManager, legacyResultsDisplayer);
         workTypesButton.addActionListener(workTypesButtonListener);
         GridBagConstraints workTypesButtonConstraints = new GridBagConstraints();
         workTypesButtonConstraints.weightx = 1;
@@ -51,7 +51,7 @@ public class ControlPanel extends JPanel {
         add(carsClientsJLabel, carsClientsJLabelConstraints);
 
         CarsClientsButton carsClientsButton = new CarsClientsButton("Make query");
-        CarsClientsButtonListener carsClientsButtonListener = new CarsClientsButtonListener(legacyQueryManager, resultsDisplayer);
+        CarsClientsButtonListener carsClientsButtonListener = new CarsClientsButtonListener(legacyQueryManager, legacyResultsDisplayer);
         carsClientsButton.addActionListener(carsClientsButtonListener);
         GridBagConstraints carsClientsButtonConstraints = new GridBagConstraints();
         carsClientsButtonConstraints.weightx = 1;
@@ -82,7 +82,7 @@ public class ControlPanel extends JPanel {
         carNamesList.toArray(carNames);
         CarWorksComboBox carWorksComboBox = new CarWorksComboBox(carNames);
         carWorksComboBox.setSelectedIndex(0);
-        CarWorksComboListener carWorksComboListener = new CarWorksComboListener(legacyQueryManager, resultsDisplayer);
+        CarWorksComboListener carWorksComboListener = new CarWorksComboListener(legacyQueryManager, legacyResultsDisplayer);
         carWorksComboBox.addActionListener(carWorksComboListener);
         GridBagConstraints carWorksComboBoxConstraints = new GridBagConstraints();
         carWorksComboBoxConstraints.weightx = 1;
@@ -135,7 +135,7 @@ public class ControlPanel extends JPanel {
         add(workerProblemsByDateComboBoxWorker, workerProblemsByDateComboBoxConstraintsWorker);
 
         WorkerProblemsByDateButton workerProblemsByDateButton = new WorkerProblemsByDateButton("Make query");
-        WorkerProblemsByDateButtonListener workerProblemsByDateButtonListener = new WorkerProblemsByDateButtonListener(legacyQueryManager, resultsDisplayer);
+        WorkerProblemsByDateButtonListener workerProblemsByDateButtonListener = new WorkerProblemsByDateButtonListener(legacyQueryManager, legacyResultsDisplayer);
         workerProblemsByDateButton.addActionListener(workerProblemsByDateButtonListener);
         GridBagConstraints workerProblemsByDateButtonConstraints = new GridBagConstraints();
         workerProblemsByDateButtonConstraints.weightx = 1;
@@ -164,7 +164,7 @@ public class ControlPanel extends JPanel {
         clientNamesList.toArray(clientNames);
         ClientCostComboBox clientCostComboBox = new ClientCostComboBox(clientNames);
         clientCostComboBox.setSelectedIndex(0);
-        ClientCostComboListener clientCostComboListener = new ClientCostComboListener(legacyQueryManager, resultsDisplayer);
+        ClientCostComboListener clientCostComboListener = new ClientCostComboListener(legacyQueryManager, legacyResultsDisplayer);
         clientCostComboBox.addActionListener(clientCostComboListener);
         GridBagConstraints clientCostComboBoxConstraints = new GridBagConstraints();
         clientCostComboBoxConstraints.weightx = 1;

@@ -1,10 +1,10 @@
-package queries;
+package models.queries;
 
 public class QueryData {
     private String[] columnNames;
     private String query;
 
-    public QueryData(String[] columnNames, String query) {
+    QueryData(String[] columnNames, String query) {
         this.columnNames = columnNames;
         this.query = query;
     }

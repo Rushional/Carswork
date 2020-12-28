@@ -1,21 +1,25 @@
 package views.panels;
 
 import controllers.QueryController;
-import queries.SelectQueries;
-import queries.TableData;
-import services.TableDataToJTable;
+import models.queries.SelectQueries;
+import models.queries.TableData;
+import services.ConvertTableDataToJTable;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class TablePanel extends JPanel {
+
+// TODO: shouldn't access the queryController. Should instead have something a bit smaller
+// or idk, this architecture is kinda weird?..
+// It works, so I'm probably going to ship it as is
+// But yeah, this should probably be improved
+    abstract class TablePanel extends JPanel {
     private JTable currentJTable = null;
     private QueryController queryController;
-    private boolean readOnly;
 
-    public TablePanel(QueryController queryController, boolean readOnly) {
+    TablePanel(QueryController queryController) {
         this.queryController = queryController;
-        this.readOnly = readOnly;
+
         setBackground(new Color(235, 240, 255));
 //        setPreferredSize(new Dimension(500, 120));
         setPreferredSize(new Dimension(700, 300));
@@ -32,32 +36,6 @@ public abstract class TablePanel extends JPanel {
         scrollPaneConstraints.insets = new Insets(10, 0, 0, 0);
         scrollPaneConstraints.gridwidth = 3;
         add(scrollPane, scrollPaneConstraints);
-
-        if (!this.readOnly) {
-            JButton deleteButton = new JButton("Удалить");
-            GridBagConstraints deleteButtonConstraints = new GridBagConstraints();
-            deleteButtonConstraints.weightx = 1;
-            deleteButtonConstraints.weighty = 1;
-            deleteButtonConstraints.gridx = 0;
-            deleteButtonConstraints.gridy = 1;
-            add(deleteButton, deleteButtonConstraints);
-
-            JButton editButton = new JButton("Редактировать");
-            GridBagConstraints editButtonConstraints = new GridBagConstraints();
-            editButtonConstraints.weightx = 1;
-            editButtonConstraints.weighty = 1;
-            editButtonConstraints.gridx = 1;
-            editButtonConstraints.gridy = 1;
-            add(editButton, editButtonConstraints);
-
-            JButton addButton = new JButton("Добавить");
-            GridBagConstraints addButtonConstraints = new GridBagConstraints();
-            addButtonConstraints.weightx = 1;
-            addButtonConstraints.weighty = 1;
-            addButtonConstraints.gridx = 2;
-            addButtonConstraints.gridy = 1;
-            add(addButton, addButtonConstraints);
-        }
 //        replaceTable();
     }
 
@@ -72,7 +50,7 @@ public abstract class TablePanel extends JPanel {
 //    that will be used in replaceTable
     private JTable getJTable() {
         TableData tableData = queryController.getTableData(getQueryEnum());
-        return TableDataToJTable.call(tableData);
+        return ConvertTableDataToJTable.call(tableData);
     }
 
     /**

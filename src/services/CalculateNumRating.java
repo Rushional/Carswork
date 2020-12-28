@@ -1,6 +1,6 @@
 package services;
 
-import models.NumericalCorrelationData;
+import models.parameters.NumericalCorrelationData;
 
 public class CalculateNumRating {
     public static double call(NumericalCorrelationData correlationData) {
@@ -29,7 +29,12 @@ public class CalculateNumRating {
             dividerFeedbackSum += Math.pow(feedback[i] - averageFeedback , 2);
         }
         double correlation = numeratorSum/Math.sqrt(dividerValueSum*dividerFeedbackSum);
-        return correlation * 5; //I wanted to separate correlation and rating here.
+        double adjustedRating = correlation * 5; //I wanted to separate correlation and rating here.
 //       Correlation ranges from 0 to 1, but rating - to 5. It's just more flashy!
+        return roundTo3DecimalPlaces(adjustedRating);
+    }
+
+    private static double roundTo3DecimalPlaces(double number) {
+        return (double) Math.round(number * 1000d) / 1000d;
     }
 }

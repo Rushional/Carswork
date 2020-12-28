@@ -1,18 +1,19 @@
 package views;
 
-import org.hibernate.Session;
+import models.database_interaction.SessionCreator;
 import controllers.QueryController;
 import views.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
-    public MainFrame(Session session) {
+// Could be a singleton
+public class Frame extends JFrame {
+    public Frame(SessionCreator sessionCreator) {
         super("Управление автосервисом");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        QueryController queryController = new QueryController(session);
+        QueryController queryController = new QueryController(sessionCreator);
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController));
         tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController));

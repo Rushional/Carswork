@@ -1,13 +1,13 @@
 package services;
 
-import queries.TableData;
+import models.queries.TableData;
 
 import javax.persistence.Tuple;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableDataToJTable {
+public class ConvertTableDataToJTable {
     public static JTable call(TableData tableData) {
         List<Tuple> listTuples = tableData.getTuplesList();
         String[] columnNames = tableData.getColumnNames();

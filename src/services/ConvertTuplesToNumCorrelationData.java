@@ -1,6 +1,6 @@
 package services;
 
-import models.NumericalCorrelationData;
+import models.parameters.NumericalCorrelationData;
 
 import javax.persistence.Tuple;
 import java.util.List;
@@ -18,10 +18,12 @@ public class ConvertTuplesToNumCorrelationData {
     }
 
     private static double fetchValue(Tuple tuple) {
-        return Double.parseDouble((String) tuple.get("value"));
+//        return Double.parseDouble((String) tuple.get("value"));
+        return (double) tuple.get("value");
     }
 
     private static double fetchFeedback(Tuple tuple) {
-        return Double.parseDouble((String) tuple.get("user_feedback"));
+//        return Double.parseDouble((String) tuple.get("user_feedback"));
+        return (double) tuple.get("user_feedback");
     }
 }

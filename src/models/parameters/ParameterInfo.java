@@ -1,4 +1,4 @@
-package models;
+package models.parameters;
 
 public class ParameterInfo {
 //    This should have been an id, but we made a really awkward database and decided not to bother editing it

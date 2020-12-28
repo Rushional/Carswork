@@ -1,13 +1,11 @@
 package views.panels;
 
-import queries.QueriesData;
 import controllers.QueryController;
-import queries.QueryData;
-import queries.SelectQueries;
+import models.queries.SelectQueries;
 
-public class WorkersPanel extends TablePanel {
+public class WorkersPanel extends TablePanelCRUD {
     public WorkersPanel(QueryController queryController) {
-        super(queryController, false);
+        super(queryController);
     }
 
     @Override

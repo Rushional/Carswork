@@ -1,4 +1,4 @@
-package models;
+package models.parameters;
 
 import java.util.List;
 

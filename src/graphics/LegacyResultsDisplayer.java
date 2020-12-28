@@ -1,6 +1,6 @@
 package graphics;
 
-import queries.LegacyQueryManager;
+import models.database_interaction.LegacyQueryManager;
 
 import javax.persistence.Tuple;
 import javax.swing.*;
@@ -8,12 +8,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultsDisplayer {
-    private Frame frame;
+public class LegacyResultsDisplayer {
+    private LegacyFrame legacyFrame;
     private LegacyQueryManager legacyQueryManager;
 
-    public void setInterface(Frame frame, LegacyQueryManager legacyQueryManager) {
-        this.frame = frame;
+    public void setInterface(LegacyFrame legacyFrame, LegacyQueryManager legacyQueryManager) {
+        this.legacyFrame = legacyFrame;
         this.legacyQueryManager = legacyQueryManager;
     }
 
@@ -21,19 +21,19 @@ public class ResultsDisplayer {
     //frame to control panel. If it's possible
     //Buuuut I'm not going to because - again - time is of the essence
     public void recreateFramePane() {
-        frame.getContentPane().removeAll();
-        ControlPanel controlPanel = new ControlPanel(legacyQueryManager, this);
-        Container pane = frame.getContentPane();
+        legacyFrame.getContentPane().removeAll();
+        LegacyControlPanel legacyControlPanel = new LegacyControlPanel(legacyQueryManager, this);
+        Container pane = legacyFrame.getContentPane();
         pane.setLayout(new GridBagLayout());
-        pane.add(controlPanel, ControlPanel.getConstraints());
-        frame.pack();
+        pane.add(legacyControlPanel, LegacyControlPanel.getConstraints());
+        legacyFrame.pack();
     }
 
     //wrong place for this and violates SRP but I've got no time to deal with it!
     private void displayJTable(JTable jTable, String tableName) {
-        ResultsPanel resultsPanel = new ResultsPanel();
-        resultsPanel.setLayout(new GridBagLayout());
-        frame.replaceResultsPanel(resultsPanel);
+        LegacyResultsPanel legacyResultsPanel = new LegacyResultsPanel();
+        legacyResultsPanel.setLayout(new GridBagLayout());
+        legacyFrame.replaceResultsPanel(legacyResultsPanel);
         JLabel tableNameJLabel = new JLabel(tableName);
         tableNameJLabel.setFont(new Font("Verdana", Font.PLAIN,16));
         GridBagConstraints tableNameJLabelConstraints = new GridBagConstraints();
@@ -42,7 +42,7 @@ public class ResultsDisplayer {
         tableNameJLabelConstraints.gridx = 0;
         tableNameJLabelConstraints.gridy = 0;
         tableNameJLabelConstraints.anchor = GridBagConstraints.PAGE_END;
-        resultsPanel.add(tableNameJLabel, tableNameJLabelConstraints);
+        legacyResultsPanel.add(tableNameJLabel, tableNameJLabelConstraints);
 
         JScrollPane scrollPane = new JScrollPane(jTable);
         jTable.setFillsViewportHeight(true);
@@ -53,10 +53,10 @@ public class ResultsDisplayer {
         scrollPaneConstraints.gridx = 0;
         scrollPaneConstraints.gridy = 1;
         scrollPaneConstraints.anchor = GridBagConstraints.PAGE_START;
-        resultsPanel.add(scrollPane, scrollPaneConstraints);
-        frame.replaceResultsPanel(resultsPanel);
-        frame.pack();
-        frame.getResultsPanel().repaint();
+        legacyResultsPanel.add(scrollPane, scrollPaneConstraints);
+        legacyFrame.replaceResultsPanel(legacyResultsPanel);
+        legacyFrame.pack();
+        legacyFrame.getLegacyResultsPanel().repaint();
     }
 
     //I know it's better to have 1 displayTable method, but no time to bother thinking about it
@@ -127,9 +127,9 @@ public class ResultsDisplayer {
 
     public void displayClientCost(double clientCost, String clientName) {
         recreateFramePane();
-        ResultsPanel resultsPanel = new ResultsPanel();
-        frame.replaceResultsPanel(resultsPanel);
-        resultsPanel.setLayout(new GridBagLayout());
+        LegacyResultsPanel legacyResultsPanel = new LegacyResultsPanel();
+        legacyFrame.replaceResultsPanel(legacyResultsPanel);
+        legacyResultsPanel.setLayout(new GridBagLayout());
         JLabel clientCostJLabel = new JLabel("Total cost for client " + clientName + " = " + clientCost);
         clientCostJLabel.setFont(new Font("Verdana", Font.PLAIN,17));
         GridBagConstraints clientCostJLabelConstraints = new GridBagConstraints();
@@ -137,9 +137,9 @@ public class ResultsDisplayer {
         clientCostJLabelConstraints.weighty = 1;
         clientCostJLabelConstraints.gridx = 0;
         clientCostJLabelConstraints.gridy = 0;
-        resultsPanel.add(clientCostJLabel, clientCostJLabelConstraints);
-        frame.replaceResultsPanel(resultsPanel);
-        frame.pack();
-        frame.getResultsPanel().repaint();
+        legacyResultsPanel.add(clientCostJLabel, clientCostJLabelConstraints);
+        legacyFrame.replaceResultsPanel(legacyResultsPanel);
+        legacyFrame.pack();
+        legacyFrame.getLegacyResultsPanel().repaint();
     }
 }

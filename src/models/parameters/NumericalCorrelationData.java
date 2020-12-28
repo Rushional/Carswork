@@ -1,4 +1,4 @@
-package models;
+package models.parameters;
 
 public class NumericalCorrelationData {
     private double[] values;

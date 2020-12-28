@@ -1,11 +1,11 @@
 package views.panels;
 
 import controllers.QueryController;
-import queries.SelectQueries;
+import models.queries.SelectQueries;
 
 public class RecommendationsPanel extends TablePanel {
     public RecommendationsPanel(QueryController queryController) {
-        super(queryController, true);
+        super(queryController);
     }
 
     @Override

@@ -1,28 +1,29 @@
 package controllers;
 
-import org.hibernate.Session;
-import queries.*;
+import models.database_interaction.SessionCreator;
+import models.queries.*;
+import services.MakeQuery;
 
 import javax.persistence.Tuple;
 import java.util.List;
 
 public class QueryController {
-    private Session session;
+    private SessionCreator sessionCreator;
 
-    public QueryController(Session session) {
-        this.session = session;
+    public QueryController(SessionCreator sessionCreator) {
+        this.sessionCreator = sessionCreator;
     }
 
     public TableData getTableData(SelectQueries queryEnum) {
         QueryData queryData = getQueryDataFromEnum(queryEnum);
-        return new TableData(MakeQuery.call(session, queryData.getQuery()), queryData.getColumnNames());
+        return new TableData(MakeQuery.call(sessionCreator, queryData.getQuery()), queryData.getColumnNames());
     }
 
-//    My queries storage and usage is a bit awkward, but I love it dearly
+//    My models.queries storage and usage is a bit awkward, but I love it dearly
 //    (and I have to do other stuff:c)
-    public List<Tuple> getParameterTable(SelectQueries queryEnum, String parameterName) {
+    List<Tuple> getParameterTable(SelectQueries queryEnum, String parameterName) {
         QueryData queryData = getQueryDataFromEnum(queryEnum, parameterName);
-        return MakeQuery.call(session, queryData.getQuery());
+        return MakeQuery.call(sessionCreator, queryData.getQuery());
     }
 
     private QueryData getQueryDataFromEnum(SelectQueries queryEnum) {
@@ -61,9 +62,5 @@ public class QueryController {
             default:
                 return getQueryDataFromEnum(queryEnum);
         }
-    }
-
-    public void sendUpdateQuery() {
-
     }
 }

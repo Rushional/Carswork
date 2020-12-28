@@ -1,4 +1,4 @@
-package queries;
+package models.database_interaction;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;

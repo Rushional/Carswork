@@ -1,13 +1,11 @@
 package views.panels;
 
-import queries.QueriesData;
 import controllers.QueryController;
-import queries.QueryData;
-import queries.SelectQueries;
+import models.queries.SelectQueries;
 
-public class ServicesPanel extends TablePanel {
+public class ServicesPanel extends TablePanelCRUD {
     public ServicesPanel(QueryController queryController) {
-        super(queryController, false);
+        super(queryController);
     }
 
     @Override

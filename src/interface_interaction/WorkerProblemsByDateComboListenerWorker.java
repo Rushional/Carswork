@@ -1,6 +1,6 @@
 package interface_interaction;
 
-import queries.LegacyQueryManager;
+import models.database_interaction.LegacyQueryManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

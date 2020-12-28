@@ -1,6 +1,6 @@
 package services;
 
-import models.QualCorrelationData;
+import models.parameters.QualCorrelationData;
 import org.apache.commons.math3.stat.inference.OneWayAnova;
 
 public class CalculateQualRating {

@@ -1,13 +1,11 @@
 package views.panels;
 
-import queries.QueriesData;
 import controllers.QueryController;
-import queries.QueryData;
-import queries.SelectQueries;
+import models.queries.SelectQueries;
 
-public class CarsPanel extends TablePanel {
+public class CarsPanel extends TablePanelAddDelete {
     public CarsPanel(QueryController queryController) {
-        super(queryController, false);
+        super(queryController);
     }
 
     @Override
