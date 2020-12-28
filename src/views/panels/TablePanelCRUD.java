@@ -1,14 +1,15 @@
 package views.panels;
 
 import controllers.QueryController;
+import models.database_interaction.DatabaseUpdater;
 
 import javax.swing.*;
 import java.awt.*;
 
 // Has all the create-read-update-delete options
 abstract class TablePanelCRUD extends TablePanelAddDelete {
-    TablePanelCRUD(QueryController queryController) {
-        super(queryController);
+    TablePanelCRUD(QueryController queryController, DatabaseUpdater databaseUpdater) {
+        super(queryController, databaseUpdater);
         JButton editButton = new JButton("Редактировать");
         GridBagConstraints editButtonConstraints = new GridBagConstraints();
         editButtonConstraints.weightx = 1;

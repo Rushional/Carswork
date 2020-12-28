@@ -14,8 +14,13 @@ import java.awt.*;
 // It works, so I'm probably going to ship it as is
 // But yeah, this should probably be improved
     abstract class TablePanel extends JPanel {
-    private JTable currentJTable = null;
+    JTable currentJTable = null;
+//    I could remove either scrollPane or the table, but it's a bit more comfortable this way
+    private JScrollPane scrollPane = null;
     private QueryController queryController;
+//    Kinda awkward, because we store data that will only be needed for TablePanelAddDelete,
+//    but it's easier this way, because the table is created here. We'd have to store something
+//    no matter what, I think. So it's okay actually
 
     TablePanel(QueryController queryController) {
         this.queryController = queryController;
@@ -25,7 +30,8 @@ import java.awt.*;
         setPreferredSize(new Dimension(700, 300));
         setLayout(new GridBagLayout());
 
-        JScrollPane scrollPane = new JScrollPane(getJTable());
+        currentJTable = getJTable();
+        scrollPane = new JScrollPane(currentJTable);
         scrollPane.setPreferredSize(new Dimension(500, 200));
         GridBagConstraints scrollPaneConstraints = new GridBagConstraints();
         scrollPaneConstraints.weightx = 1;
@@ -39,11 +45,10 @@ import java.awt.*;
 //        replaceTable();
     }
 
-//    This method removes the current shown panel and immediately starts displaying another one
+//    start showing updated table
     void replaceTable() {
-//        start showing it!
-//        That's probably redrawing it or something. Maybe call revalidate or some king of repaint or whatever?..
-//        I don't remember! Yay!
+        currentJTable = getJTable();
+        scrollPane.setViewportView(currentJTable);
     }
 
 //    calls MakeQuery with the right parameters (taken from QueriesData) and so gets the needed table

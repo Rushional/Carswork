@@ -3,16 +3,16 @@ package models.queries;
 public class QueriesData {
     public static QueryData workers() {
         return new QueryData(
-                new String[]{"ФИО", "Отзывы", "Номер телефона"},
-                "SELECT worker_name, avg_client_feedback, phone_number\n" +
+                new String[]{"ФИО", "Отзывы", "Номер телефона", "Дата рождения", "Дата принятия на работу5"},
+                "SELECT worker_name, avg_client_feedback, phone_number, birthday, hire_date\n" +
                         "FROM worker"
         );
     }
 
     public static QueryData ownedModels() {
         return new QueryData(
-                new String[]{"Название", "Рейтинг", "Отзывы", "Стоимость аренды"},
-                "SELECT model_name, system_rating, user_feedback, rent_cost\n" +
+                new String[]{"Название", "Рейтинг", "Стоимость аренды"},
+                "SELECT model_name, system_rating, rent_cost\n" +
                         "FROM car_model\n" +
                         "LEFT JOIN owned_model_data ON model_name = fk_model_name\n" +
                         "WHERE is_owned = true"

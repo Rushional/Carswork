@@ -32,4 +32,11 @@ public class DatabaseUpdater {
                  "\tWHERE parameter_name = '" + parameterName + "'";
         executeQuery(parameterQuery);
     }
+
+    public void deleteEntry(String databaseName, String identifierColumnName, String identifier) {
+        String deleteQuery =
+                "DELETE FROM " + databaseName + "\n" +
+                 "\tWHERE " + identifierColumnName + " = '" + identifier + "'";
+        executeQuery(deleteQuery);
+    }
 }

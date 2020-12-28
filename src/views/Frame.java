@@ -1,5 +1,6 @@
 package views;
 
+import models.database_interaction.DatabaseUpdater;
 import models.database_interaction.SessionCreator;
 import controllers.QueryController;
 import views.panels.*;
@@ -14,13 +15,14 @@ public class Frame extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         QueryController queryController = new QueryController(sessionCreator);
+        DatabaseUpdater databaseUpdater = new DatabaseUpdater(sessionCreator);
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController));
-        tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController));
-        tabbedPane.addTab("Машины", new CarsPanel(queryController));
+        tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController, databaseUpdater));
+        tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController, databaseUpdater));
+        tabbedPane.addTab("Машины", new CarsPanel(queryController, databaseUpdater));
         tabbedPane.addTab("Заказы", new OrdersPanel(queryController));
         tabbedPane.addTab("Рекомендации", new RecommendationsPanel(queryController));
-        tabbedPane.addTab("Услуги", new ServicesPanel(queryController));
+        tabbedPane.addTab("Услуги", new ServicesPanel(queryController, databaseUpdater));
         add(tabbedPane, BorderLayout.WEST);
         setResizable(false);
     }
