@@ -39,4 +39,12 @@ public class DatabaseUpdater {
                  "\tWHERE " + identifierColumnName + " = '" + identifier + "'";
         executeQuery(deleteQuery);
     }
+
+    public void updateWorker(String identifier, String phoneNumber) {
+        String updateWorkerQuery =
+                "UPDATE worker\n" +
+                 "\tSET phone_number='" + phoneNumber + "'\n" +
+                 "\tWHERE worker_name = '" + identifier + "'";
+        executeQuery(updateWorkerQuery);
+    }
 }

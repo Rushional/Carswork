@@ -4,9 +4,11 @@ import controllers.QueryController;
 import models.database_interaction.DatabaseUpdater;
 import models.queries.SelectQueries;
 
+import javax.swing.*;
+
 public class ServicesPanel extends TablePanelCRUD {
-    public ServicesPanel(QueryController queryController, DatabaseUpdater databaseUpdater) {
-        super(queryController, databaseUpdater);
+    public ServicesPanel(QueryController queryController, DatabaseUpdater databaseUpdater, JFrame parentFrame) {
+        super(queryController, databaseUpdater, parentFrame);
     }
 
     @Override

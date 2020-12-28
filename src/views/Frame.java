@@ -17,12 +17,12 @@ public class Frame extends JFrame {
         QueryController queryController = new QueryController(sessionCreator);
         DatabaseUpdater databaseUpdater = new DatabaseUpdater(sessionCreator);
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController, databaseUpdater));
-        tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController, databaseUpdater));
+        tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController, databaseUpdater, this));
+        tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController, databaseUpdater, this));
         tabbedPane.addTab("Машины", new CarsPanel(queryController, databaseUpdater));
         tabbedPane.addTab("Заказы", new OrdersPanel(queryController));
         tabbedPane.addTab("Рекомендации", new RecommendationsPanel(queryController));
-        tabbedPane.addTab("Услуги", new ServicesPanel(queryController, databaseUpdater));
+        tabbedPane.addTab("Услуги", new ServicesPanel(queryController, databaseUpdater, this));
         add(tabbedPane, BorderLayout.WEST);
         setResizable(false);
     }

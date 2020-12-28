@@ -8,9 +8,13 @@ import java.awt.*;
 
 // Has all the create-read-update-delete options
 abstract class TablePanelCRUD extends TablePanelAddDelete {
-    TablePanelCRUD(QueryController queryController, DatabaseUpdater databaseUpdater) {
+    JFrame parentFrame;
+    JButton editButton;
+
+    TablePanelCRUD(QueryController queryController, DatabaseUpdater databaseUpdater, JFrame parentFrame) {
         super(queryController, databaseUpdater);
-        JButton editButton = new JButton("Редактировать");
+        this.parentFrame = parentFrame;
+        editButton = new JButton("Редактировать");
         GridBagConstraints editButtonConstraints = new GridBagConstraints();
         editButtonConstraints.weightx = 1;
         editButtonConstraints.weighty = 1;

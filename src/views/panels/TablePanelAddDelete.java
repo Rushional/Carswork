@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public abstract class TablePanelAddDelete extends TablePanel {
-    private String currentId = null;
+    String currentId = null;
     private JButton deleteButton;
     private DatabaseUpdater databaseUpdater;
 
