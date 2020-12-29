@@ -9,11 +9,17 @@ public class DialogEditWorkers extends DialogEdit {
 
     public DialogEditWorkers(JFrame frame) {
         super(frame);
+//        I know I could use lambda, but this just feels more intuitive
+//        I should probably grow out of it. I think this is a sign that I'm not
+//        comfortable with lambdas yet. I should work on that.
         okayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                phoneNumber = textField.getText();
-                DialogEditWorkers.this.dispose();
+                String textFieldValue = textField.getText();
+                if (!textFieldValue.equals("")) {
+                    phoneNumber = textField.getText();
+                    DialogEditWorkers.this.dispose();
+                }
             }
         });
     }

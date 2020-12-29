@@ -3,6 +3,8 @@ package views.dialogs;
 import javax.swing.*;
 import java.awt.*;
 
+// TODO: the dialogs should get the current value of the entry and out it into the textBox
+//  as initial text. Not critical, just better UI.
 public abstract class DialogEdit extends Dialog {
     JTextField textField;
     JButton okayButton;
