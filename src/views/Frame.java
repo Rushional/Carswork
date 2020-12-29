@@ -19,7 +19,7 @@ public class Frame extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Сотрудники", new WorkersPanel(queryController, databaseUpdater, this));
         tabbedPane.addTab("Марки машин", new CarModelsPanel(queryController, databaseUpdater, this));
-        tabbedPane.addTab("Машины", new CarsPanel(queryController, databaseUpdater));
+        tabbedPane.addTab("Машины", new CarsPanel(queryController, databaseUpdater, this));
         tabbedPane.addTab("Заказы", new OrdersPanel(queryController));
         tabbedPane.addTab("Рекомендации", new RecommendationsPanel(queryController));
         tabbedPane.addTab("Услуги", new ServicesPanel(queryController, databaseUpdater, this));

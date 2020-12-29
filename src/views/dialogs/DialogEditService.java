@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DialogEditServices extends DialogEdit {
+public class DialogEditService extends DialogEdit {
     private double servicePrice = Double.NaN;
 
-    public DialogEditServices(JFrame frame) {
+    public DialogEditService(JFrame frame) {
         super(frame);
         okayButton.addActionListener(new ActionListener() {
             @Override
@@ -15,7 +15,7 @@ public class DialogEditServices extends DialogEdit {
                 String textFieldValue = textField.getText();
                 if (!textFieldValue.equals("")) {
                     servicePrice = Double.parseDouble(textFieldValue);
-                    DialogEditServices.this.dispose();
+                    DialogEditService.this.dispose();
                 }
             }
         });

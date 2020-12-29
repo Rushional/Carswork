@@ -10,15 +10,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public abstract class TablePanelAddDelete extends TablePanel {
+abstract class TablePanelAddDelete extends TablePanel {
     String currentId = null;
-    private JButton deleteButton;
-    private DatabaseUpdater databaseUpdater;
+    JFrame parentFrame;
+    JButton addButton;
+    JButton deleteButton;
+    DatabaseUpdater databaseUpdater;
 
-    public TablePanelAddDelete(QueryController queryController, DatabaseUpdater databaseUpdater) {
+    TablePanelAddDelete(QueryController queryController, DatabaseUpdater databaseUpdater, JFrame parentFrame) {
         super(queryController);
         this.databaseUpdater = databaseUpdater;
-        JButton addButton = new JButton("Добавить");
+        this.parentFrame = parentFrame;
+        addButton = new JButton("Добавить");
         GridBagConstraints addButtonConstraints = new GridBagConstraints();
         addButtonConstraints.weightx = 1;
         addButtonConstraints.weighty = 1;
@@ -39,12 +42,16 @@ public abstract class TablePanelAddDelete extends TablePanel {
     private void addTableListener() {
         currentJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent event) {
-                currentId = currentJTable.getValueAt(currentJTable.getSelectedRow(), 0).toString();
+                updateCurrentIdentifier();
             }
         });
     }
 
-    private void addDeleteButtonListener() {
+    void updateCurrentIdentifier() {
+        currentId = currentJTable.getValueAt(currentJTable.getSelectedRow(), 0).toString();
+    }
+
+    void addDeleteButtonListener() {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

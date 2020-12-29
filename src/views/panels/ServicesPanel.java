@@ -3,7 +3,9 @@ package views.panels;
 import controllers.QueryController;
 import models.database_interaction.DatabaseUpdater;
 import models.queries.SelectQueries;
-import views.dialogs.DialogEditServices;
+import views.dialogs.DialogAddService;
+import views.dialogs.DialogEditService;
+import views.dialogs.ServiceData;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,13 +21,27 @@ public class ServicesPanel extends TablePanelCRUD {
                 replaceTable();
             }
         });
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                databaseUpdater.addService(getAddedData());
+                replaceTable();
+            }
+        });
     }
 
-    double getEditedServicePrice() {
-        var dialog = new DialogEditServices(parentFrame);
+    private double getEditedServicePrice() {
+        var dialog = new DialogEditService(parentFrame);
         dialog.pack();
         dialog.setVisible(true);
         return dialog.getRentCost();
+    }
+
+    private ServiceData getAddedData() {
+        var dialog = new DialogAddService(parentFrame);
+        dialog.pack();
+        dialog.setVisible(true);
+        return dialog.getServiceData();
     }
 
     @Override

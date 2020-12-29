@@ -5,11 +5,10 @@ import java.awt.*;
 
 // TODO: the dialogs should get the current value of the entry and out it into the textBox
 //  as initial text. Not critical, just better UI.
-public abstract class DialogEdit extends Dialog {
+abstract class DialogEdit extends Dialog {
     JTextField textField;
-    JButton okayButton;
 
-    public DialogEdit(JFrame frame) {
+    DialogEdit(JFrame frame) {
         super(frame);
         var inputLabel = new JLabel(getInputLabelText());
         var inputLabelConstraints = new GridBagConstraints();
@@ -24,13 +23,6 @@ public abstract class DialogEdit extends Dialog {
         textFieldConstraints.gridy = 1;
         textFieldConstraints.anchor = GridBagConstraints.WEST;
         panel.add(textField, textFieldConstraints);
-
-        okayButton = new JButton("Готово");
-        var okayButtonConstraints = new GridBagConstraints();
-        okayButtonConstraints.gridx = 1;
-        okayButtonConstraints.gridy = 1;
-        okayButtonConstraints.anchor = GridBagConstraints.WEST;
-        panel.add(okayButton, okayButtonConstraints);
     }
 
     @Override

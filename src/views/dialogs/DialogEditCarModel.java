@@ -11,10 +11,10 @@ import java.awt.event.ActionListener;
 // would require too much effort. It's not worth it right now in my opinion.
 // I think it's much more efficient to just make 2 classes that are really similar
 // So that's what I'm running with!
-public class DialogEditCarModels extends DialogEdit {
+public class DialogEditCarModel extends DialogEdit {
     private double rentCost = Double.NaN;
 
-    public DialogEditCarModels(JFrame frame) {
+    public DialogEditCarModel(JFrame frame) {
         super(frame);
         okayButton.addActionListener(new ActionListener() {
             @Override
@@ -26,7 +26,7 @@ public class DialogEditCarModels extends DialogEdit {
                 String textFieldValue = textField.getText();
                 if (!textFieldValue.equals("")) {
                     rentCost = Double.parseDouble(textFieldValue);
-                    DialogEditCarModels.this.dispose();
+                    DialogEditCarModel.this.dispose();
                 }
             }
         });

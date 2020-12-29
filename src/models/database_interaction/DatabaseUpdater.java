@@ -2,6 +2,10 @@ package models.database_interaction;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import views.dialogs.CarData;
+import views.dialogs.CarModelData;
+import views.dialogs.ServiceData;
+import views.dialogs.WorkerData;
 
 // Makes update queries with given parameters, knows all the needed query strings already
 public class DatabaseUpdater {
@@ -66,5 +70,56 @@ public class DatabaseUpdater {
                  "\tSET service_price = '" + servicePrice + "'\n" +
                  "\tWHERE fk_work_type_name = '" + identifier + "'";
         executeQuery(updateServicesQuery);
+    }
+
+    public void addWorker(WorkerData addedData) {
+        String addWorkerQuery =
+                "INSERT INTO worker(\n" +
+                 "\tworker_name, birthday, hire_date, phone_number)\n" +
+                 "\tVALUES (" +
+                        "'" + addedData.getName() + "', " +
+                        "'" + addedData.getBirth() + "', " +
+                        "'" + addedData.getHire() + "', " +
+                        "'" + addedData.getPhone() + "'" +
+                        ");";
+        executeQuery(addWorkerQuery);
+    }
+
+    public void addCarModel(CarModelData addedData) {
+        String addModelQuery =
+                "INSERT INTO car_model(\n" +
+                 "\tmodel_name, is_owned)\n" +
+                 "\tVALUES ('" + addedData.getName() + "', true);";
+        executeQuery(addModelQuery);
+        String addDataQuery =
+                "INSERT INTO public.owned_model_data(\n" +
+                        "\tfk_model_name, rent_cost)\n" +
+                        "\tVALUES ('" + addedData.getName() + "', " + addedData.getCost() + ");";
+        executeQuery(addDataQuery);
+    }
+
+    public void addCar(CarData addedData) {
+        String addCarQuery =
+                "INSERT INTO car(\n" +
+                        "\tlicense_plate, fk_model_name, fk_color_name)\n" +
+                        "\tVALUES (" +
+                        "'" + addedData.getLicensePlate() + "', " +
+                        "'" + addedData.getModelName() + "', " +
+                        "'" + addedData.getColor() + "'" +
+                        ");";
+        executeQuery(addCarQuery);
+    }
+
+    public void addService(ServiceData addedData) {
+        String addServiceQuery =
+                "INSERT INTO work_type(\n" +
+                 "\twork_type_name)\n" +
+                 "\tVALUES ('" + addedData.getName() + "');";
+        executeQuery(addServiceQuery);
+        String addPriceQuery =
+                "INSERT INTO service_type_price(\n" +
+                 "\tfk_work_type_name, service_price)\n" +
+                 "\tVALUES ('" + addedData.getName() + "', '" + addedData.getPrice() + "');";
+        executeQuery(addPriceQuery);
     }
 }

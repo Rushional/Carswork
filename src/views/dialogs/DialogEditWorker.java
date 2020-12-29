@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DialogEditWorkers extends DialogEdit {
+public class DialogEditWorker extends DialogEdit {
     private String phoneNumber = null;
 
-    public DialogEditWorkers(JFrame frame) {
+    public DialogEditWorker(JFrame frame) {
         super(frame);
 //        I know I could use lambda, but this just feels more intuitive
 //        I should probably grow out of it. I think this is a sign that I'm not
@@ -17,8 +17,8 @@ public class DialogEditWorkers extends DialogEdit {
             public void actionPerformed(ActionEvent e) {
                 String textFieldValue = textField.getText();
                 if (!textFieldValue.equals("")) {
-                    phoneNumber = textField.getText();
-                    DialogEditWorkers.this.dispose();
+                    phoneNumber = textFieldValue;
+                    DialogEditWorker.this.dispose();
                 }
             }
         });

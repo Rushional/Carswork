@@ -14,9 +14,9 @@ import java.awt.*;
 // It works, so I'm probably going to ship it as is
 // But yeah, this should probably be improved
     abstract class TablePanel extends JPanel {
-    JTable currentJTable = null;
+    JTable currentJTable;
 //    I could remove either scrollPane or the table, but it's a bit more comfortable this way
-    private JScrollPane scrollPane = null;
+    private JScrollPane scrollPane;
     private QueryController queryController;
 //    Kinda awkward, because we store data that will only be needed for TablePanelAddDelete,
 //    but it's easier this way, because the table is created here. We'd have to store something
@@ -30,7 +30,7 @@ import java.awt.*;
         setPreferredSize(new Dimension(700, 300));
         setLayout(new GridBagLayout());
 
-        currentJTable = getJTable();
+        currentJTable = getDatabaseJTable();
         scrollPane = new JScrollPane(currentJTable);
         scrollPane.setPreferredSize(new Dimension(500, 200));
         GridBagConstraints scrollPaneConstraints = new GridBagConstraints();
@@ -46,16 +46,23 @@ import java.awt.*;
     }
 
 //    start showing updated table
+//    TODO: I need to check if this stops entry selection from working
+//     actually, I think the problem might be that I use getJTable() instead of currentJTable
     void replaceTable() {
-        currentJTable = getJTable();
+        currentJTable = getDatabaseJTable();
         scrollPane.setViewportView(currentJTable);
     }
 
 //    calls MakeQuery with the right parameters (taken from QueriesData) and so gets the needed table
 //    that will be used in replaceTable
-    private JTable getJTable() {
+    private JTable getDatabaseJTable() {
         TableData tableData = queryController.getTableData(getQueryEnum());
         return ConvertTableDataToJTable.call(tableData);
+    }
+
+//    TODO: child classes should start using this instead of getDatabaseJTable
+    JTable getCurrentJTable() {
+        return currentJTable;
     }
 
     /**

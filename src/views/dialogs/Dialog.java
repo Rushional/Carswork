@@ -3,10 +3,11 @@ package views.dialogs;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Dialog extends JDialog {
+abstract class Dialog extends JDialog {
     JPanel panel;
+    JButton okayButton;
 
-    public Dialog(JFrame frame) {
+    Dialog(JFrame frame) {
         super(frame, ModalityType.APPLICATION_MODAL);
 //        This is needed to calculate the position of the dialog
 //        But the actual size is determined by the size of the panel
@@ -25,7 +26,19 @@ public abstract class Dialog extends JDialog {
         panel.setLayout(panelLayout);
         panel.setBackground(new Color(173, 196, 228));
         panel.setPreferredSize(new Dimension(getDialogWidth(), getDialogHeight()));
+
+        okayButton = new JButton("Готово");
+        var okayButtonConstraints = new GridBagConstraints();
+        setOkayButtonCoordinates(okayButtonConstraints);
+        okayButtonConstraints.anchor = GridBagConstraints.EAST;
+        panel.add(okayButton, okayButtonConstraints);
+
         add(panel, panelConstraints);
+    }
+
+    void setOkayButtonCoordinates(GridBagConstraints okayButtonConstraints) {
+        okayButtonConstraints.gridx = 1;
+        okayButtonConstraints.gridy = 1;
     }
 
     abstract int getDialogWidth();
